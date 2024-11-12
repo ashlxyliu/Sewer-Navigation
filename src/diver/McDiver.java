@@ -5,9 +5,6 @@ import graph.ShortestPaths;
 
 import java.util.*;
 
-
-/** This is the place for your implementation of the {@code SewerDiver}.
- */
 public class McDiver implements SewerDiver {
     private void dfs(SeekState state, long curr, Map<Long, Boolean> visited, Map<Long, Boolean> noVisit) {
         if (state.distanceToRing() == 0) {
@@ -40,36 +37,13 @@ public class McDiver implements SewerDiver {
         dfs(state, bestNeighbor, visited, noVisit);
     }
 
-    /** See {@code SewerDriver} for specification. */
-    @Override
     public void seek(SeekState state) {
-        // TODO : Look for the ring and return.
-        // DO NOT WRITE ALL THE CODE HERE. DO NOT MAKE THIS METHOD RECURSIVE.
-        // Instead, write your method (it may be recursive) elsewhere, with a
-        // good specification, and call it from this one.
-        //
-        // Working this way provides you with flexibility. For example, write
-        // one basic method, which always works. Then, make a method that is a
-        // copy of the first one and try to optimize in that second one.
-        // If you don't succeed, you can always use the first one.
-        //
-        // Use this same process on the second method, scram.
         HashMap<Long, Boolean> visited = new HashMap<>();
         HashMap<Long, Boolean> noVisits = new HashMap<>();
         dfs(state, state.currentLocation(), visited, noVisits);
     }
 
-    @Override
     public void scram(ScramState state) {
-        // TODO: Get out of the sewer system before the steps are used up.
-//        // DO NOT WRITE ALL THE CODE HERE. Instead, write your method elsewhere,
-//        // with a good specification, and call it from this one.
-//        Node n = state.currentNode();
-//        LinkedList visited = new LinkedList();
-//        ShortestPaths path;
-//        dfs2(state, n, visited, path);
-
-
         Maze m = new Maze((Set<Node>) state.allNodes());
         Node nextBCoin = bestCoin(state);
         ShortestPaths<Node, Edge> s = new ShortestPaths<>(m);
